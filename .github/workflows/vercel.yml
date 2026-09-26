@@ -1,0 +1,22 @@
+name: Deploy to Vercel
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Prepare existing project
+        run: |
+          mkdir -p public/.vercel
+          cp index.html 404.html public/
+          printf '{"orgId":"team_Wf2mIYmTmtSJvgOUqeQjBirL","projectId":"prj_0rsZUZRxKO7uJidXiQE12ltQ2aB6"}' > public/.vercel/project.json
+      - name: Deploy to production
+        run: npx --yes vercel@60.1.3 deploy public --prod --yes --token="$VERCEL_TOKEN" --scope=abners-projects-6f97a189
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
