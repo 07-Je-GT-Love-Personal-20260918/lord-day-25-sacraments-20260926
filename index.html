@@ -10,7 +10,7 @@
 :root{
   --bg:#f5f1e8; --paper:#fffdf8; --ink:#18231f; --muted:#63716b; --line:#ded7c8;
   --accent:#8f6d35; --accent2:#284d42; --accent3:#b99b67; --danger:#7a3e37;
-  --shadow:0 18px 60px rgba(34,44,38,.10); --radius:22px; --max:1240px;
+  --shadow:0 18px 60px rgba(34,44,38,.10); --radius:22px; --max:1600px;
 }
 [data-theme="dark"]{
   --bg:#0e1714; --paper:#14201c; --ink:#edf3ef; --muted:#a9b7b0; --line:#2e3d36;
@@ -32,9 +32,10 @@ h1{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:clamp(2.5rem,
 .hero-card .num{font-size:4.7rem;font-family:Georgia,serif;color:var(--accent);line-height:1}.hero-card h3{margin:.2rem 0 .5rem}.hero-card p{margin:.35rem 0;color:var(--muted)}
 .toolbar{position:sticky;top:12px;z-index:1000;margin:-28px auto 30px;width:min(var(--max),calc(100% - 28px));display:flex;gap:10px;justify-content:flex-end;pointer-events:none}
 .toolbar button{pointer-events:auto;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 88%,transparent);color:var(--ink);border-radius:999px;padding:9px 13px;box-shadow:0 8px 28px rgba(0,0,0,.07);backdrop-filter:blur(12px);cursor:pointer}
-.layout{width:min(var(--max),calc(100% - 30px));margin:0 auto 100px;display:grid;grid-template-columns:290px minmax(0,1fr);gap:30px;align-items:start}
+.layout{width:min(var(--max),calc(100% - 30px));margin:0 auto 100px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:24px;align-items:start}
 .toc{position:sticky;top:68px;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow);max-height:calc(100vh - 90px);overflow:auto}.toc h3{margin:0 0 10px;font-size:1rem}.toc a{display:block;text-decoration:none;color:var(--muted);padding:6px 8px;border-radius:10px;font-size:.91rem}.toc a:hover,.toc a.active{background:color-mix(in srgb,var(--accent2) 12%,transparent);color:var(--ink)}
-.toc.hidden{display:none}.layout.toc-hidden{grid-template-columns:1fr}
+.toc.hidden{display:none}.layout.toc-hidden{grid-template-columns:1fr}.toc-backdrop{display:none}
+.toc-close{margin:0 0 18px auto;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);cursor:pointer}
 main{min-width:0}.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,4vw,48px);box-shadow:var(--shadow);margin-bottom:26px;overflow:hidden}.panel.flat{box-shadow:none}
 .eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:800}.section-title{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:clamp(1.75rem,3vw,2.7rem);line-height:1.2;margin:.3rem 0 1rem}.section-intro{color:var(--muted);font-size:1.04rem}
 .quote{margin:22px 0;padding:18px 20px;border-left:4px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--paper));border-radius:0 16px 16px 0}.quote strong{display:block;margin-bottom:4px}
@@ -54,8 +55,10 @@ main{min-width:0}.panel{background:var(--paper);border:1px solid var(--line);bor
 .ref-list{font-size:.9rem;color:var(--muted)}.ref-list li{margin:.55rem 0;overflow-wrap:anywhere}.ref-list a{color:var(--accent2)}
 footer{width:min(var(--max),calc(100% - 30px));margin:0 auto 56px;color:var(--muted);font-size:.85rem;text-align:center}
 .pill-row{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.pill{border:1px solid var(--line);padding:5px 10px;border-radius:999px;font-size:.82rem;color:var(--muted)}
-@media(max-width:980px){.hero-inner{grid-template-columns:1fr}.hero{min-height:auto}.layout{grid-template-columns:1fr}.toc{display:none}.toolbar{top:8px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}.mindmap{grid-template-columns:1fr}.mindmap .center{grid-column:auto;grid-row:auto;aspect-ratio:auto;border-radius:20px}.art-grid{grid-template-columns:1fr}}
-@media(max-width:640px){body{line-height:1.72}.hero{padding:64px 17px 48px}.panel{padding:22px 18px;border-radius:18px}.g2,.g3,.g4{grid-template-columns:1fr}.point-head{gap:10px}.point-no{font-size:2.6rem}.flow .node{min-width:155px}.art-card img{height:240px}.toolbar{justify-content:center}.map-wrap{padding:6px}.map-wrap svg{min-height:300px}.kicker{font-size:.78rem}h1{font-size:2.8rem}}
+@media(max-width:980px){.hero-inner{grid-template-columns:1fr}.hero{min-height:auto}.layout,.layout.toc-hidden{display:block;width:calc(100% - 24px)}.toc,.toc.hidden{display:block;position:fixed;z-index:1202;top:0;left:0;width:min(84vw,370px);height:100dvh;max-height:none;border-radius:0 22px 22px 0;padding:calc(24px + env(safe-area-inset-top)) 20px 30px;overflow:auto;overscroll-behavior:contain;visibility:hidden;pointer-events:none;transform:translateX(-105%);transition:transform .25s ease,visibility .25s}.toc a{padding:11px 10px;font-size:1rem}.toc h3{font-size:1.2rem}.toc-close{display:block}.toc-backdrop{display:block;position:fixed;z-index:1201;inset:0;background:rgba(10,20,16,.62);border:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}body.toc-open{overflow:hidden}body.toc-open .toc{visibility:visible;pointer-events:auto;transform:translateX(0)}body.toc-open .toc-backdrop{opacity:1;visibility:visible;pointer-events:auto}.toolbar{top:8px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}.mindmap{grid-template-columns:1fr}.mindmap .center{grid-column:auto;grid-row:auto;aspect-ratio:auto;border-radius:20px}.art-grid{grid-template-columns:1fr}}
+@media(min-width:981px){.toc-close{display:none}}
+@media(max-width:640px){body{line-height:1.76}.hero{padding:54px 16px 48px}.layout,.layout.toc-hidden{width:calc(100% - 16px)}.panel{padding:24px 18px;border-radius:16px;margin-bottom:12px}.g2,.g3,.g4{grid-template-columns:1fr}.point-head{gap:10px}.point-no{font-size:2.6rem}.flow{display:grid;overflow:visible;gap:20px}.flow .node{min-width:0}.flow .node:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-25px;transform:translateX(50%)}.art-card img{height:240px}.toolbar{justify-content:flex-end;gap:5px;width:calc(100% - 20px);margin-bottom:18px}.toolbar button{padding:9px 12px}.map-wrap{padding:8px;overflow-x:auto}.map-wrap svg{width:680px;min-height:0}.kicker{font-size:.78rem}h1{font-size:clamp(2.3rem,10vw,3.5rem);line-height:1.14;max-width:none}.hero-card{padding:20px}.section-title{overflow-wrap:anywhere}.table-wrap{scrollbar-width:thin}.table-wrap:after{content:"表格可左右滑动查看完整内容 →";display:block;padding:8px 12px;color:var(--muted);font-size:.78rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.route,.route2{animation:none}.toc,.toc-backdrop{transition:none}}
 @media print{.toolbar,.toc,#progress{display:none!important}.layout{display:block;width:100%;margin:0}.panel{box-shadow:none;break-inside:avoid;border-color:#ccc}.hero{min-height:auto;padding:30px;background:#fff}.hero-inner{display:block}.hero-card{box-shadow:none;margin-top:20px}body{background:#fff;color:#111}.discussion details{break-inside:avoid}.discussion details:not([open]) .answer{display:block}.discussion details:not([open]) summary:after{display:none}}
 </style>
 </head>
@@ -80,18 +83,22 @@ footer{width:min(var(--max),calc(100% - 30px));margin:0 auto 56px;color:var(--mu
   </div>
 </header>
 <div class="toolbar">
-  <button id="tocBtn" type="button">目录</button>
+  <button id="tocBtn" type="button" aria-controls="toc" aria-expanded="false">目录</button>
   <button id="themeBtn" type="button">深色</button>
   <button onclick="window.print()" type="button">打印</button>
 </div>
+<button class="toc-backdrop" id="tocBackdrop" type="button" aria-label="关闭目录" tabindex="-1"></button>
 <div class="layout" id="layout">
-  <nav class="toc" id="toc">
+  <nav class="toc" id="toc" aria-label="文章目录">
+    <button class="toc-close" id="tocClose" type="button" aria-label="关闭目录">关闭目录 ×</button>
     <h3>详细目录</h3>
     <a href="#overview">01 核心总览</a>
     <a href="#context">02 历史与经文现场</a>
+    <a href="#exegesis">02A 两段经文逐层释义</a>
     <a href="#map">03 地理与救赎历史地图</a>
     <a href="#whole-bible">04 整本圣经的位置</a>
     <a href="#catechism">05 Q65–68逐问解读</a>
+    <a href="#questions">05A 更深的神学问题</a>
     <a href="#sermon">06 讲章正文：三大点</a>
     <a href="#compare">07 标志、印记与圣礼比较</a>
     <a href="#discussion">08 六道讨论题详解</a>
@@ -129,6 +136,28 @@ footer{width:min(var(--max),calc(100% - 30px));margin:0 auto 56px;color:var(--mu
         <div class="art-card portrait"><img loading="lazy" alt="1563年海德堡要理问答" onerror="this.closest('.art-card').classList.add('broken')" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Heidelberger_Katechismus_1563_%282%29.jpg"><figcaption>1563年《海德堡要理问答》版本影像。要理问答并非抽象神学笔记，而是为教会教导、讲道、家庭和下一代信仰塑造而写。</figcaption></div>
       </figure>
       <div class="quote"><strong>前后文的关键连接</strong>主日23：我怎样在神面前称义？——唯独因真信心接受基督。主日24：善行为什么不能成为义？——因为最好的行为也不完全。主日25：那使我有份于基督的信心从哪里来、怎样坚固？——圣灵藉圣言生发，藉圣礼坚固。于是逻辑不是“信心 → 再加圣礼才得救”，而是“基督 → 福音应许 → 圣灵赐信 → 圣礼坚固这信”。</div>
+    </section>
+
+    <section class="panel" id="exegesis">
+      <div class="eyebrow">Close Reading · 出12 / 罗4</div>
+      <h2 class="section-title">两段经文怎样共同回答：神为何给应许加上可见记号？</h2>
+      <p class="section-intro">先守住两段经文各自的原意，再谈它们与主日25的关系。出埃及记12章直接讲逾越节与出埃及；罗马书4章直接论证因信称义的福分也临到未受割礼的人。把它们放在一起，是循着圣经自身的救赎脉络作神学联系，不是说两处经文原本就在讲新约洗礼或圣餐。</p>
+      <h3>出埃及记12:1–28｜一夜之间，神把奴隶变为有共同记念的百姓</h3>
+      <div class="grid g2">
+        <div class="card"><h4>1–13节：拯救的办法来自神</h4><p>新月份、选羊羔、十四日宰杀、把血涂在门框，细节都出自神的话。经文说血要作“记号”；核心不是“血有独立魔力”，而是神说祂看见血就越过那家（12:13）。记号的效力不能从说话的神、祂的应许和所指定的代替分开。</p></div>
+        <div class="card"><h4>14–20节：得救之夜成为世代记念</h4><p>经文随即规定逾越节和除酵节的记念。神不仅要救他们脱离当晚的审判，也要让后代活在“我们是被救赎出来的百姓”这段共同历史里。礼仪的重复不是重复那一夜，而是让后人不断听见并回应神已经施行的拯救。</p></div>
+        <div class="card"><h4>21–23节：房内的人倚靠房外的应许</h4><p>长老把命令带回家；家人并未亲眼看见审判如何越过，却依照神的话留在涂血的门内。可见的记号与所听见的话彼此相连。经文没有说各家的道德好坏决定了门是否安全；他们存活，是因神按祂的应许施行拯救。</p></div>
+        <div class="card"><h4>24–28节：孩子发问，父母解释</h4><p>“这礼是什么意思？”是经文预先留给下一代的问题。父母的答案必须讲神怎样越过以色列人的房屋、拯救他们。可见仪式若不伴随解释，会沦为习惯；解释若不归向神的作为，也会沦为宗教知识。</p></div>
+      </div>
+      <div class="quote"><strong>从逾越节到基督，如何避免跳跃？</strong>逾越节首先纪念以色列出埃及。新约才以“基督是我们的逾越节羔羊”（林前5:7）展开成全的读法；最后晚餐又发生在逾越节背景中（太26:17–29）。因此，旧约羊羔不是一幅任意取来的插画，而是被新约重新照亮的救赎历史预表；它与圣餐有关，却不能把两者所有细节机械等同。</div>
+      <h3>罗马书4:9–25｜保罗追问：因信得义的福分到底属于谁？</h3>
+      <div class="grid g2">
+        <div class="card"><h4>9–12节：先算为义，后受割礼</h4><p>保罗把时间次序变成论证：亚伯拉罕被算为义时仍未受割礼（创15:6；割礼命令见创17）。割礼是先前因信所得之义的“记号和印记”（罗4:11），不是买来义的价格。由此，未受割礼而信的人也能称亚伯拉罕为父；受割礼的人也必须行在他的信心脚踪中。</p></div>
+        <div class="card"><h4>13–17节：应许立于恩典，不立于人的功绩</h4><p>如果承受应许靠律法表现，信心就被架空，应许也失去保障。保罗说应许本乎信、属乎恩，因此才能坚定地临到亚伯拉罕所有的后裔（4:16）。记号的可靠性来自那位赐应许的神，而不是受记号之人能否把自己变成完美信徒。</p></div>
+        <div class="card"><h4>18–22节：信心面对的是使无变有的神</h4><p>亚伯拉罕没有否认自己与撒拉的身体条件；他在不可能的处境中仰望能使死人复活的神。信心不是拒绝现实、制造感觉，而是看清现实仍相信神有能力成就祂说过的话。保罗关心的是信心所投靠的对象。</p></div>
+        <div class="card"><h4>23–25节：故事走到读者与复活的主</h4><p>“算为他义”并非只为亚伯拉罕写下，也为信那叫耶稣复活的神的人写下。基督“为我们的过犯被交付，为我们的称义复活”（4:25）。这才是罗马书4章的终点：印记使人看向应许，而应许最终把人带到死而复活的基督。</p></div>
+      </div>
+      <div class="application"><b>两段经文的共同结构：</b>神先说话并主动拯救 → 祂赐下可见记号 → 百姓以信心领受并向下一代解释 → 记号把人带回神的应许。两段经文所处的时代与礼仪不同，不能把逾越节、割礼、洗礼、圣餐直接画成四个等号。</div>
     </section>
 
     <section class="panel" id="map">
@@ -179,6 +208,23 @@ footer{width:min(var(--max),calc(100% - 30px));margin:0 auto 56px;color:var(--mu
       </div>
     </section>
 
+    <section class="panel" id="questions">
+      <div class="eyebrow">Theological Depth</div>
+      <h2 class="section-title">再问深一层：记号、信心、教会与基督究竟怎样相连？</h2>
+      <div class="grid g2">
+        <div class="card"><h3>为什么不让信徒只读一本书？</h3><p>因为救恩不是脱离身体、时间与群体的观念。神用话语解释祂所作的事，也让教会在洗礼和圣餐中看见并领受同一应许。圣礼没有给福音添加新内容；它使神已说出的福音进入教会共同的可见生活（太28:19；林前11:26）。</p></div>
+        <div class="card"><h3>“有圣礼”是否等于“必然得救”？</h3><p>不等于。罗4:12不仅提到受割礼，也提到“行在……信心的脚踪里”。记号客观地由神设立；领受救恩的益处仍须凭信投靠基督。旧约先知责备只有外在记号而没有归向神的心（申10:16；30:6）。这既防止把圣礼当魔法，也防止把它看成毫无意义的人造装饰。</p></div>
+        <div class="card"><h3>“印记”印在谁的应许上？</h3><p>印记确认的是神的福音承诺，不是我今天已达到某种信心水平。确据的次序不能颠倒：基督完成救恩 → 神在福音中应许 → 圣灵使人信靠 → 圣礼进一步确认。若先要求自己达到无疑惑才敢来到应许面前，便把印记错当成对人的成绩评定。</p></div>
+        <div class="card"><h3>旧约记号与新约圣礼如何相续？</h3><p>相续在同一位赐应许的神、同一条恩典的道路及指向基督的方向；差异在基督已来到、献祭已完成，新约记号因此回望祂已完成的工作，并盼望祂再来。罗4关于亚伯拉罕个人受割礼的次序，不能不经论证就套给每个新约受洗者；具体施行问题还需结合其他经文和教会信条讨论。</p></div>
+      </div>
+      <div class="quote"><strong>全篇最深的转向</strong>人总想问：“我有没有足够的信心，让神肯守约？”经文迫使我们先问：“立约的神怎样在基督里守住祂的应许？”圣礼不是人用来催促神兑现承诺的凭证；是神主动俯就软弱之人，让他们在看得见的记号中重新听见祂已说的话。</div>
+      <div class="table-wrap"><table><thead><tr><th>问题</th><th>经文先说什么</th><th>讲道可怎样回应</th></tr></thead><tbody>
+        <tr><td><strong>我怎样安全？</strong></td><td>出12:13：神按祂的应许看见血便越过。</td><td>救恩倚靠神指定的拯救，不倚靠家中人的自我评价。</td></tr>
+        <tr><td><strong>我怎样被称义？</strong></td><td>罗4:10–11：亚伯拉罕未受割礼时已因信得义。</td><td>记号证实应许，不能代替信靠基督。</td></tr>
+        <tr><td><strong>我软弱时往哪里看？</strong></td><td>罗4:20–25：神能成就应许，并使耶稣复活。</td><td>从不断量度自己，转向那位被交付又复活的主。</td></tr>
+      </tbody></table></div>
+    </section>
+
     <section class="panel" id="sermon">
       <div class="eyebrow">Sermon Manuscript</div><h2 class="section-title">讲章：神赐下圣礼，为要坚固我们软弱的信心</h2>
       <div class="quote"><strong>中心命题</strong>神并不因我们的信心软弱就降低福音的真实性；相反，祂藉圣灵、圣言与圣礼，把我们的眼睛一次又一次从自己转向基督，使我们在摇摆中仍能凭应许而活。</div>
@@ -191,12 +237,14 @@ footer{width:min(var(--max),calc(100% - 30px));margin:0 auto 56px;color:var(--mu
         <h4>一、圣洁来自设立者，不来自人的加工</h4><p>普通的水仍是水，普通的饼和酒仍保有其受造物性质；但当它们按照基督的命令在教会中施行，并与神的话和应许相连时，它们被用于圣洁的用途。圣礼的尊严不来自礼仪华丽程度，不来自主持者个人的属灵强度，而来自基督的设立。</p>
         <h4>二、因此我们既不可轻看，也不可迷信</h4><p>轻看圣礼，是把神为软弱信徒预备的恩典媒介当作可有可无；迷信圣礼，则是把记号从基督和福音中分离，仿佛动作本身自动施恩。改革宗拒绝这两个极端：既高举圣礼的客观设立，也坚持圣灵按祂的应许借着信心使圣礼真正成为信徒的益处。</p>
         <h4>三、出埃及记12章让我们看见“圣洁”的严肃</h4><p>逾越节的礼仪不是以色列人自己发明的宗教表达。羊羔怎样选、何时宰、血涂在哪里、怎样吃，都由神规定。救赎不由人设计；人只能凭信领受神所指定的拯救方式。新约圣礼同样如此：教会不是圣礼的主人，而是受托的管家。</p>
+        <p>留意出12:26–27那位发问的孩子：神吩咐百姓保留这个礼，并预备好解释它。孩子先看见一桌与平常不同的饭，再听父母讲“耶和华怎样拯救我们的家”。若礼仪没有神的解释，就只剩动作；若解释没有神所命定的记念，下一代也可能把救赎听成遥远的旧闻。神给教会的可见记号，正把听道与共同生活连起来。</p>
         <div class="application"><b>应用：</b>预备洗礼或领圣餐时，不是问“这个仪式能给我什么感觉”，而是问：“设立这圣礼的主是谁？祂在这里向祂的百姓说了什么？我是否以悔改和信心领受祂的应许？”</div>
       </article>
 
       <article class="sermon-point">
         <div class="point-head"><div class="point-no">2</div><div><h3>圣礼是标志：它不让我们停在水、饼、酒上，而把我们的信心指向基督</h3><p class="section-intro">“标志”的本质，是它指向自身之外的现实。路标若使人只欣赏路标而忘了目的地，就失去功能；圣礼若使人只注意仪式而不仰望基督，同样失去其圣经方向。</p></div></div>
         <h4>一、割礼指向更深的洁净与归属</h4><p>罗马书4章最重要的次序是：亚伯拉罕先因信被算为义，后领受割礼作为标志。割礼指向立约的归属，也指向更深的“心受割礼”——神必须在人里面作洁净和更新的工作。</p>
+        <p>保罗为何如此在意“先”与“后”？因为他正回答：没有受割礼的外邦人，是否也能蒙称义之福？如果义要在受割礼以后才临到，福音便成了某一群人的宗教资格；但亚伯拉罕的故事表明，神在他未受割礼时就算他为义。所以圣礼的标志不能取代福音，教会也不能把自己拥有的外在记号，当作拒绝悔改与信心的理由。</p>
         <h4>二、逾越节指向代替性的拯救</h4><p>出埃及记12章的血是一个外在标志，但它所指向的是神在审判中借着代替而施行拯救。家庭吃羊羔，不是在“用餐本身”里寻找功德，而是在顺服中承认：我们得存活，是因为神按祂的话预备了代替。</p>
         <h4>三、洗礼把我们指向基督的洗净与联合</h4><p>水可见地表现洗净；新约则把信徒的洗礼与基督的死和复活联系起来。水不是基督的血，但水按照基督的命令，指向祂的血真正洁净罪污，以及信徒被带入祂名下、归属于祂。</p>
         <h4>四、圣餐把我们指向基督舍身流血的救恩</h4><p>饼被擘开、杯被递出，不是在重复十字架献祭；正相反，圣餐之所以能成为福音的标志，是因为献祭已经一次完成。教会在吃喝中宣告主的死，直到祂来。</p>
@@ -211,6 +259,7 @@ footer{width:min(var(--max),calc(100% - 30px));margin:0 auto 56px;color:var(--mu
         <div class="point-head"><div class="point-no">3</div><div><h3>圣礼是印记：神把祂福音应许的可靠性再次印在信徒的良心上</h3><p class="section-intro">“标志”回答“它指向什么？”；“印记”回答“神藉此向我确认什么？”</p></div></div>
         <h4>一、印记不是给神看的，是给软弱的我们看的</h4><p>神的话本来就完全可靠，祂不需要圣礼来使自己的应许变得更真。需要被坚固的是我们。正因为我们的心迟钝、健忘、受控告、容易把注意力拉回自己，神才以可见、身体性的方式重复同一福音。</p>
         <h4>二、罗马书4章给“印记”最清楚的圣经语言</h4><p>割礼作为印记，确认的不是亚伯拉罕肉身行为的价值，而是“他在未受割礼时因信所得的义”。换言之，印记把信徒带回神已经应许的义，而不是制造一种新的义。</p>
+        <p>而且保罗没有停在4:11；他继续讲那位在不可能中仍信神的亚伯拉罕，直到4:25把我们带到基督的死与复活。主日25说圣言与圣礼都要把眼睛引到十字架，正是沿着这个方向：印记既不使人围着“我受过什么仪式”打转，也不使人只想“我感觉有多确定”；它把我们带去看神在基督里已经成就了什么。</p>
         <h4>三、印记如何帮助软弱的良心？</h4><p>当你说：“我的信心太小，所以神可能不要我。”福音回答：“你的救恩不建立在信心大小，而建立在基督的完全。”圣礼又以可见方式补上一句：“正是这位基督和祂的恩惠，神在祂的约中向祂百姓应许；不要把确据建筑在情绪上，要建筑在神真实可靠的话上。”</p>
         <h4>四、真正的坚固不是把人带向自信，而是带向基督信靠</h4><p>圣礼不是让人说“我受过洗，所以不管怎样都安全”或“我领了圣餐，所以自动得恩典”；而是使人说：“我没有任何可以夸口的义；但基督是完全的救主，神的应许不会说谎。我因此悔改，再次凭信投靠祂。”</p>
         <div class="application"><b>应用：</b>当感觉控告你时，不要用感觉反驳感觉。让客观的福音应许审判你的感觉：基督的十字架是否完成？神是否可信？圣灵是否会藉祂所设立的方式牧养教会？圣礼正把答案放到你眼前。</div>
@@ -246,7 +295,7 @@ footer{width:min(var(--max),calc(100% - 30px));margin:0 auto 56px;color:var(--mu
     <section class="panel discussion" id="discussion">
       <div class="eyebrow">Discussion Guide</div><h2 class="section-title">六道讨论题：详细答案与带领思路</h2>
       <p class="section-intro">下面不是只给“标准答案”，而是给出可以带领小组逐层追问的逻辑：经文事实 → 神学判断 → 误区辨析 → 个人应用。</p>
-      <details open><summary>1. 根据66问，我们怎样才能有份于基督和祂的一切恩惠？真信心怎么产生的？</summary><div class="answer">
+      <details open><summary>1. 根据65问，我们怎样才能有份于基督和祂的一切恩惠？真信心怎么产生的？</summary><div class="answer">
         <h4>第一层：有份于基督的方式</h4><p>严格从主日25的前后文说，我们<strong>唯独藉真信心</strong>有份于基督和祂一切恩惠。信心不是另一种功德，而是空手领受基督。称义的义在基督里面，不在信心这个动作本身里面。</p>
         <h4>第二层：真信心的来源</h4><p>Q65明确说，真信心<span class="key">从圣灵而来</span>。圣灵通常藉福音的宣讲在人的心里工作，使人认识罪、看见基督的充足、悔改并信靠祂。罗10:17所表达的次序正是“信道从听道而来”。</p>
         <h4>第三层：圣礼处于什么位置</h4><p>圣礼不是先制造一个“没有福音内容的信”，而是坚固圣灵藉福音所生发的信。可以记成：<strong>圣灵是作者，福音是生发信心的主要外在媒介，圣礼是坚固信心的可见福音。</strong></p>
@@ -304,8 +353,8 @@ footer{width:min(var(--max),calc(100% - 30px));margin:0 auto 56px;color:var(--mu
     <section class="panel" id="sources">
       <div class="eyebrow">References</div><h2 class="section-title">参考来源与图像说明</h2>
       <ol class="ref-list">
-        <li>《海德堡要理问答》主日25，Q65–68；本页以用户提供的中文文本为主，并参考 Heidelberg-Catechism.com 的英文版本与历史资料。</li>
-        <li>Heidelberg-Catechism.com, “Lord’s Day 25” 与 “Origin / History” 页面：用于核对主日25英文结构、1563年出版与普法尔茨改革背景。</li>
+        <li>《海德堡要理问答》主日25，Q65–68；参考 <a href="https://www.heidelberg-catechism.com/en/lords-days/25.html" target="_blank" rel="noopener">Heidelberg-Catechism.com 主日25</a>，用于核对四问的结构与措辞。正文的释经、类比和应用为讲章解释，不当作要理问答原句。</li>
+        <li>经文核对：<a href="https://www.biblegateway.com/passage/?search=Exodus%2012%3A1-28&version=KJV" target="_blank" rel="noopener">出12:1–28</a>；<a href="https://www.biblegateway.com/passage/?search=Romans%204%3A9-25&version=KJV" target="_blank" rel="noopener">罗4:9–25</a>。特别注意出12:13、26–27与罗4:10–12、16、23–25。</li>
         <li>圣经核心经文：创17；申30:6；出12:1–28；太26:26–29；28:18–20；罗3:21–4:25；6:1–4；林前10:16；11:23–26；来10:10–14。</li>
         <li>图像一：Gerard Hoet 等，《The Israelites Eat the Passover》，1728，Wikimedia Commons，Public Domain。</li>
         <li>图像二：1563年《Heidelberger Katechismus》影像，Wikimedia Commons，Public Domain reproduction。</li>
@@ -320,7 +369,14 @@ footer{width:min(var(--max),calc(100% - 30px));margin:0 auto 56px;color:var(--mu
 const root=document.documentElement, toc=document.getElementById('toc'), layout=document.getElementById('layout');
 document.getElementById('themeBtn').addEventListener('click',e=>{const dark=root.dataset.theme==='dark'; root.dataset.theme=dark?'':'dark'; e.target.textContent=dark?'深色':'浅色'; localStorage.setItem('ld25-theme',dark?'light':'dark')});
 if(localStorage.getItem('ld25-theme')==='dark'){root.dataset.theme='dark';document.getElementById('themeBtn').textContent='浅色'}
-document.getElementById('tocBtn').addEventListener('click',()=>{toc.classList.toggle('hidden');layout.classList.toggle('toc-hidden')});
+const tocBtn=document.getElementById('tocBtn'), mobileToc=matchMedia('(max-width:980px)');
+function closeMobileToc(restoreFocus=false){document.body.classList.remove('toc-open');tocBtn.setAttribute('aria-expanded','false');if(restoreFocus)tocBtn.focus()}
+tocBtn.addEventListener('click',()=>{if(mobileToc.matches){const opening=!document.body.classList.contains('toc-open');document.body.classList.toggle('toc-open',opening);tocBtn.setAttribute('aria-expanded',String(opening));if(opening)document.getElementById('tocClose').focus()}else{toc.classList.toggle('hidden');layout.classList.toggle('toc-hidden');tocBtn.setAttribute('aria-expanded',String(!toc.classList.contains('hidden')))}});
+document.getElementById('tocClose').addEventListener('click',()=>closeMobileToc(true));
+document.getElementById('tocBackdrop').addEventListener('click',()=>closeMobileToc(true));
+toc.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>closeMobileToc()));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('toc-open'))closeMobileToc(true)});
+mobileToc.addEventListener('change',()=>closeMobileToc());
 const sections=[...document.querySelectorAll('main section[id]')], links=[...toc.querySelectorAll('a')];
 const obs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id))}})},{rootMargin:'-20% 0px -68% 0px',threshold:0});sections.forEach(s=>obs.observe(s));
 addEventListener('scroll',()=>{const h=document.documentElement;const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;document.getElementById('progress').style.width=Math.max(0,Math.min(100,p))+'%'},{passive:true});
