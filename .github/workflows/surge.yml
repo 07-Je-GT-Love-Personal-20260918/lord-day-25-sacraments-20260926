@@ -1,0 +1,21 @@
+name: Deploy to Surge
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Prepare static files
+        run: |
+          mkdir public
+          cp index.html 404.html public/
+      - name: Publish on Surge
+        run: npx --yes surge@0.44.4 public lord-day-25-sacraments-20260926.surge.sh
+        env:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
