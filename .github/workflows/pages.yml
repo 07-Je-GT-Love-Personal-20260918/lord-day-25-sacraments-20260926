@@ -19,9 +19,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: .
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify Psalm 131 public page
+        env:
+          PAGE_ROOT: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          URL="${PAGE_ROOT%/}/psalm131/"
+          curl --fail --location --retry 5 --retry-delay 2 --max-time 30 "$URL" -o /tmp/ps131.html
+          grep -F '<title>作上帝谦卑的儿女｜诗篇131｜2026-09-27</title>' /tmp/ps131.html
+          grep -F '七个讨论题：逐题参考答案与分析' /tmp/ps131.html
+          grep -F '教学地图示意' /tmp/ps131.html
+          test "$(wc -c < /tmp/ps131.html)" -gt 25000
