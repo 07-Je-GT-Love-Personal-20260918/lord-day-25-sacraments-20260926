@@ -19,6 +19,6 @@ jobs:
           cp ps131-site/index.html public/index.html
           cp ps131-site/index.html public/404.html
       - name: Publish on Surge
-        run: npx --yes surge@0.44.4 public psalm-131-humble-children-20260927.surge.sh
+        run: npx --yes surge@0.44.4 public psalm131-20260927-abner199.surge.sh
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
