@@ -18,7 +18,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          code="$(curl -sS -o response.json -w "%{http_code}" \
+          code=$(curl -sS -o response.json -w "%{http_code}" \
             -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${GH_TOKEN}" \
