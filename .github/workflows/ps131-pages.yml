@@ -1,0 +1,44 @@
+name: Deploy Psalm 131 to GitHub Pages
+on:
+  push:
+    branches: [psalm-131-deploy-20260927]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: ps131-pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preserve existing root and add Psalm 131 path
+        run: |
+          mkdir -p public/psalm131
+          cp index.html public/index.html
+          cp 404.html public/404.html
+          touch public/.nojekyll
+          cp ps131-site/index.html public/psalm131/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify public GitHub Pages
+        env:
+          PAGE_ROOT: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          URL="${PAGE_ROOT%/}/psalm131/"
+          curl --fail --location --retry 5 --retry-delay 2 --max-time 30 "$URL" -o /tmp/ps131.html
+          grep -F '<title>作上帝谦卑的儿女｜诗篇131｜2026-09-27</title>' /tmp/ps131.html
+          grep -F '七个讨论题：逐题参考答案与分析' /tmp/ps131.html
+          grep -F '教学地图示意' /tmp/ps131.html
+          test "$(wc -c < /tmp/ps131.html)" -gt 25000
