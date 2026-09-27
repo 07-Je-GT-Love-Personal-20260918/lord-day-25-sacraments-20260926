@@ -23,3 +23,10 @@ jobs:
         run: npx --yes surge@0.44.4 public lord-day-25-sacraments-20260926.surge.sh
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      - name: Verify the public Surge page
+        run: |
+          curl --fail --location --retry 5 --retry-delay 2 --max-time 30             https://lord-day-25-sacraments-20260926.surge.sh/psalm131/ -o /tmp/ps131.html
+          grep -F '<title>作上帝谦卑的儿女｜诗篇131｜2026-09-27</title>' /tmp/ps131.html
+          grep -F '七个讨论题：逐题参考答案与分析' /tmp/ps131.html
+          grep -F '教学地图示意' /tmp/ps131.html
+          test "$(wc -c < /tmp/ps131.html)" -gt 25000
